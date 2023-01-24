@@ -4,8 +4,9 @@
 
 from api.v1.views import app_views
 
+
 @app_views.route('/status')
 def status():
     """return ok if everything works
     """
-    return ({ 'status': 'OK' })
+    return ({'status': 'OK'})
