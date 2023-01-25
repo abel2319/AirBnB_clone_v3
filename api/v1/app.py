@@ -14,10 +14,12 @@ app.register_blueprint(app_views)
 
 @app.teardown_appcontext
 def teardown_appcontext(response_or_exc):
+    """method to handle @app.teardown_appcontext"""
     storage.close()
 
 @simple_page.errorhandler(404)
 def page_not_found(e):
+    """handler for 404 errors """
     return render_template({"error": "Not found"})
 
 
