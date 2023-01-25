@@ -75,8 +75,7 @@ class FileStorage:
             cls (class)
             id (str):  string representing the object ID
         """
-        if cls is not None and type(cls) is str and id is not None and\
-                type(id) is str and cls in classes:
+        if cls is not None and id is not None and cls in classes:
             tmp = self.all(cls)
             for obj in tmp:
                 if tmp[obj].get('id') == id:
