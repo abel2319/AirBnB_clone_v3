@@ -113,3 +113,21 @@ class TestFileStorage(unittest.TestCase):
         with open("file.json", "r") as f:
             js = f.read()
         self.assertEqual(json.loads(string), json.loads(js))
+
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_get(self):
+        """Test to retreive properly object from database"""
+        storage = FileStorage()
+        new_dict = storage.all()
+        for key, obj in new_dict:
+            i = obj
+            break
+        j = storage.get(i.__class__, i.id)
+        self.assertEqual(i, j)
+    
+    @unittest.skipIf(models.storage_t == 'db', "not testing file storage")
+    def test_count(self):
+        """Test to count number of object save in file.json"""
+        storage = FileStorage()
+        new_dict = storage.all()
+        self.assertEqual(len(new_dit), storage.count())
