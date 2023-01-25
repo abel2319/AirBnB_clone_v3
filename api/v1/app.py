@@ -16,6 +16,10 @@ app.register_blueprint(app_views)
 def teardown_appcontext(response_or_exc):
     storage.close()
 
+@simple_page.errorhandler(404)
+def page_not_found(e):
+    return render_template({"error": "Not found"})
+
 
 host = '0.0.0.0'
 port = 5000
