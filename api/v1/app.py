@@ -17,6 +17,7 @@ def teardown_appcontext(response_or_exc):
     """method to handle @app.teardown_appcontext"""
     storage.close()
 
+
 @simple_page.errorhandler(404)
 def page_not_found(e):
     """handler for 404 errors """
