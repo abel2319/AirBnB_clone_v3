@@ -81,12 +81,20 @@ class DBStorage:
             cls (class)
             id (str):  string representing the object ID
         """
-        tmp = self.all(cls)
-        for obj in tmp:
-            if obj.get('id') == id:
-                return (classes[obj.get('__class__')](**obj))
+        if cls is not None and type(cls) is str and id is not None and\
+                type(id) is str and cls in classes:
+            tmp = self.all(cls)
+            for obj in tmp:
+                if tmp[obj].get('id') == id:
+                    return (tmp[obj])
         return (None)
 
     def count(self, cls=None):
         """ method to count the number of objects in storage"""
-        return (len(all(cls)))
+        rtn = 0
+        if cls is None:
+            for c in classes.values():
+                rtn += self.__session.query(c).count()
+            return (rtn)
+        rtn += self.__session.query(cls).count() 
+        return (rtn)
