@@ -75,10 +75,12 @@ class FileStorage:
             cls (class)
             id (str):  string representing the object ID
         """
-        tmp = self.all(cls)
-        for obj in tmp:
-            if obj.get('id') == id:
-                return (classes[obj.get('__class__')](**obj))
+        if cls is not None and type(cls) is str and id is not None and\
+                type(id) is str and cls in classes:
+            tmp = self.all(cls)
+            for obj in tmp:
+                if tmp[obj].get('id') == id:
+                    return (classes[tmp[obj].get('__class__')](**obj))
         return (None)
 
     def count(self, cls=None):
